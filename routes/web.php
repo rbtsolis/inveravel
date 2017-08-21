@@ -13,4 +13,11 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('auth');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('products', 'ProductController');
+Route::resource('categories', 'CategoryController');

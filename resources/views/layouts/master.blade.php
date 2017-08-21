@@ -52,7 +52,7 @@
               <!-- The user image in the navbar-->
               <img src="/images/avatar.png" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">John Doe</span>
+              <span class="hidden-xs">{{ Auth::user()->name }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -60,7 +60,7 @@
                 <img src="/images/avatar.png" class="img-circle" alt="User Image">
 
                 <p>
-                  John Doe - Web Developer
+                  {{ Auth::user()->name }} - Web Developer
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -85,7 +85,14 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="{{ route('logout') }}" class="btn btn-default btn-flat"
+                      onclick="event.preventDefault();
+                               document.getElementById('logout-form').submit();">
+                      Sign out
+                  </a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      {{ csrf_field() }}
+                  </form>
                 </div>
               </li>
             </ul>
@@ -107,7 +114,7 @@
           <img src="/images/avatar.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>John Doe</p>
+          <p>{{ Auth::user()->name }}</p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
@@ -129,19 +136,29 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HEADER</li>
         <li><a href="/"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
-        <!--
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+          <a href="#"><i class="fa fa-cube"></i> <span>Products</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
+            <li><a href="/products/"> <i class="fa fa-list-alt"></i> List of Products</a></li>
+            <li><a href="/products/create/"> <i class="fa  fa-plus"></i> Add Product</a></li>
           </ul>
         </li>
-        -->
+        <li class="treeview">
+          <a href="#"><i class="fa fa-tags"></i> <span>Categories</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/categories/"> <i class="fa fa-list-alt"></i> List of categories</a></li>
+            <li><a href="/categories/create/"> <i class="fa  fa-plus"></i> Add Category</a></li>
+          </ul>
+        </li>
+
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -152,6 +169,7 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+      @yield('content')
     </section>
 
     <!-- Main content -->
