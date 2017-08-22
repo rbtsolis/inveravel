@@ -136,6 +136,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HEADER</li>
         <li><a href="/"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
+        <li><a href="/amazon/"><i class="fa fa-amazon"></i><span>asdas</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-cube"></i> <span>Products</span>
             <span class="pull-right-container">
@@ -203,6 +204,11 @@ var url = window.location;
 $('ul.sidebar-menu a').filter(function() {
 	 return this.href == url;
 }).parent().addClass('active');
+
+// for treeview
+$('ul.treeview-menu a').filter(function() {
+	 return this.href == url;
+}).parentsUntil(".sidebar-menu > .treeview-menu").addClass('active');
 </script>
 
 </body>

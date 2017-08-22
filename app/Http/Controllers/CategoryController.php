@@ -8,12 +8,11 @@ use App\Category;
 
 class CategoryController extends Controller
 {
-  /*
-  public function __construct()
-  {
+
+  public function __construct() {
     $this->middleware('auth');
   }
-  */
+
 
     /**
      * Display a listing of the resource.
@@ -22,7 +21,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+      $categories = Category::all();
+      return view('categories.index', [ 'categories' => $categories ]);
     }
 
     /**
